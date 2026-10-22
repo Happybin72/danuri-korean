@@ -1,7 +1,7 @@
 'use strict';
 const PREFIX='danuri-topik-';
-const CACHE=PREFIX+'312c34f345e1';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./core.js','./site-config.js','./analytics.js','./manifest.webmanifest','./data/topik-data.js','./data/catalogue.js','./data/ATTRIBUTION.md','./assets/bomi.svg','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png'];
+const CACHE=PREFIX+'53bc997c489d';
+const ASSETS=['./','./index.html','./styles.css?v=quick-quiz-1','./app.js?v=quick-quiz-1','./core.js?v=quick-quiz-1','./site-config.js','./analytics.js','./manifest.webmanifest','./data/topik-data.js','./data/catalogue.js','./data/ATTRIBUTION.md','./assets/bomi.svg','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{
