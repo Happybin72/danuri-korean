@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 400" fill="none">
+<title>Bomi, a Korean tiger wearing a mint hanbok</title>
+<ellipse cx="180" cy="370" rx="114" ry="15" fill="#163F3B" opacity=".14"/>
+<path d="M267 303c72 13 74-55 43-61-22-3-30 17-16 24" stroke="#EAA153" stroke-width="26" stroke-linecap="round"/>
+<path d="m300 292 15 9m-9-35 15-4" stroke="#523C37" stroke-width="8"/>
+<path d="M111 331v28c0 17 42 21 45 0l5-28m38 0 5 28c3 21 45 17 45 0v-28" fill="#ECAF68" stroke="#523C37" stroke-width="5"/>
+<path d="M117 234c-13 9-26 62-27 97 33 28 143 29 177 0-4-42-19-85-31-97" fill="#A7D5C4" stroke="#523C37" stroke-width="5"/>
+<path d="m125 236 53 47 57-47" fill="#FFFAEB" stroke="#523C37" stroke-width="5" stroke-linejoin="round"/>
+<path d="m173 277 12 6 18-22" stroke="#E67E6D" stroke-width="15"/>
+<path d="m188 282 29 9-13 12-16-21 4 42" stroke="#B84F48" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M114 244c-27 13-39 25-52 4l-15-34" stroke="#523C37" stroke-width="39" stroke-linecap="round"/>
+<path d="M114 244c-27 13-39 25-52 4l-15-34" stroke="#A7D5C4" stroke-width="29" stroke-linecap="round"/>
+<path d="M48 215c-15-4-22-18-16-28 1-6 7-4 10 3-4-13 3-19 10-4 0-14 10-13 11 1 13 13 7 31-15 28" fill="#EDAD62" stroke="#523C37" stroke-width="5" stroke-linejoin="round"/>
+<path d="M242 250c23 4 38 24 22 45" stroke="#523C37" stroke-width="36" stroke-linecap="round"/>
+<path d="M242 250c23 4 38 24 22 45" stroke="#A7D5C4" stroke-width="26" stroke-linecap="round"/>
+<ellipse cx="260" cy="298" rx="17" ry="19" fill="#EDAD62" stroke="#523C37" stroke-width="5"/>
+<circle cx="111" cy="103" r="32" fill="#ECAA5E" stroke="#523C37" stroke-width="5"/><circle cx="249" cy="103" r="32" fill="#ECAA5E" stroke="#523C37" stroke-width="5"/>
+<circle cx="112" cy="103" r="17" fill="#E89F93"/><circle cx="248" cy="103" r="17" fill="#E89F93"/>
+<path d="M180 85c77 0 104 39 104 87 0 54-36 83-104 83S76 226 76 172c0-48 27-87 104-87" fill="#F4B86E" stroke="#523C37" stroke-width="5"/>
+<path d="m162 88 8 26m20-27-4 27M80 155l24 8m-25 18 24-3m177-23-24 8m25 18-24-3" stroke="#73483D" stroke-width="8" stroke-linecap="round"/>
+<path d="M180 199c-34-43-70-10-58 15 15 30 100 30 116 0 13-25-23-58-58-15" fill="#FFF3D8"/>
+<ellipse cx="137" cy="172" rx="8" ry="11" fill="#523C37"/><ellipse cx="223" cy="172" rx="8" ry="11" fill="#523C37"/>
+<circle cx="139" cy="168" r="2.5" fill="white"/><circle cx="225" cy="168" r="2.5" fill="white"/>
+<path d="M173 196q7-5 14 0-1 10-7 10t-7-10" fill="#523C37"/><path d="M180 206c0 14-17 14-18 5m18-5c0 14 17 14 18 5" stroke="#523C37" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="112" cy="196" rx="13" ry="8" fill="#E98F80"/><ellipse cx="248" cy="196" rx="13" ry="8" fill="#E98F80"/>
+<path d="M124 86q54-15 112 0" stroke="#523C37" stroke-width="7" stroke-linecap="round"/>
+<path d="m153 86 5-40h44l6 40" fill="#42685F" stroke="#523C37" stroke-width="5"/>
+<path d="M143 46q38-13 70 0" stroke="#523C37" stroke-width="7" stroke-linecap="round"/>
+<path d="m105 288 4 13m-18-6h29" stroke="#FFFAEB" stroke-width="4" stroke-linecap="round"/>
+</svg>
