@@ -32,6 +32,7 @@
     'Import a non-empty cards array (maximum 5,000 cards).':'空ではないカード配列を読み込んでください（最大5,000枚）。','Your collection can contain at most 5,000 personal cards.':'自作カードは最大5,000枚まで保存できます。',
     'Source links must use http or https.':'出典リンクにはhttpまたはhttpsを指定してください。','This is not a Danuri backup (schema version 1).':'Danuriのバックアップ（形式バージョン1）ではありません。','Backup is too large. Limit: 5,000 personal cards.':'バックアップが大きすぎます。自作カードの上限は5,000枚です。','Personal card IDs must be unique and start with custom-.':'自作カードのIDは重複せず、custom-で始まる必要があります。',
     'Skip to learning content':'学習コンテンツへ移動','MY KOREAN JOURNEY':'韓国語の学習記録',
+    'Correct:':'正解：',
     'Words, expressions & grammar':'単語・表現・文法','Current search':'現在の検索',
     'Japanese translation by Danuri; the exact source entry has no Japanese equivalent.':'この項目の日本語訳はDanuriが作成しました。原典の同じ見出しには日本語訳がありません。',
     'vocabulary':'語彙','expression':'表現','grammar':'文法','listening':'聞き取り','reading':'読解',
@@ -118,6 +119,11 @@
     if(translated===undefined){
       patterns||=(pack.patterns||[]).map(([pattern,replacement])=>[new RegExp(pattern,'u'),replacement]);
       for(const [pattern,replacement] of [...dynamic,...patterns]){if(pattern.test(text)){translated=text.replace(pattern,replacement);break;}}
+    }
+    if(translated===undefined){
+      const prefix=text.match(/^[←↑↓♡♥]\s+/u)?.[0]||'',suffix=text.match(/\s+[→↗✓+]$/u)?.[0]||'';
+      if(prefix||suffix){const middle=text.slice(prefix.length,suffix?-suffix.length:undefined),localized=t(middle);if(localized!==middle)translated=prefix+localized+suffix;}
+      if(text.startsWith('Import failed: '))translated='読み込みに失敗しました：'+t(text.slice(15));
     }
     if(translated!==undefined){translated=translated.replace(/^(Today|Explore|My collection|mock tests)に戻る$/u,(_,name)=>({'Today':'今日','Explore':'探す','My collection':'マイコレクション','mock tests':'模擬試験'}[name])+'に戻る').replace(/をShow$/u,'を表示').replace(/をHide$/u,'を隠す');}
     return translated===undefined?source:source.slice(0,source.indexOf(text))+translated+source.slice(source.indexOf(text)+text.length);

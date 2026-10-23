@@ -1,7 +1,7 @@
 'use strict';
 const PREFIX='danuri-topik-';
-const CACHE=PREFIX+'e01e1b03ed1a';
-const ASSETS=['./','./index.html','./styles.css?v=ja-install-2','./app.js?v=ja-install-2','./core.js?v=ja-install-2','./site-config.js','./analytics.js','./manifest.webmanifest','./data/topik-data.js','./data/catalogue.js?v=ja-install-2','./data/ja-catalogue.js?v=ja-install-2','./data/ja-project.js?v=ja-install-2','./i18n-ui.js?v=ja-install-2','./i18n.js?v=ja-install-2','./pwa-install.js?v=ja-install-2','./data/ATTRIBUTION.md','./assets/bomi.svg','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png'];
+const CACHE=PREFIX+'d5bd8d305dd7';
+const ASSETS=['./','./index.html','./styles.css?v=ja-install-3','./app.js?v=ja-install-3','./core.js?v=ja-install-3','./site-config.js','./analytics.js','./manifest.webmanifest','./data/topik-data.js','./data/catalogue.js?v=ja-install-3','./data/ja-catalogue.js?v=ja-install-3','./data/ja-project.js?v=ja-install-3','./i18n-ui.js?v=ja-install-3','./i18n.js?v=ja-install-3','./pwa-install.js?v=ja-install-3','./data/ATTRIBUTION.md','./assets/bomi.svg','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{
