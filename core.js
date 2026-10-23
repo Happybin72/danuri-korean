@@ -14,8 +14,8 @@
   function shuffle(list, random = Math.random) {
     const a=[...list]; for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
   }
-  const normalizedAnswer=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim().replace(/[.!?]+$/,'');
-  const meaningParts=value=>new Set(String(value||'').split(/[;,]/).map(normalizedAnswer).filter(Boolean));
+  const normalizedAnswer=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim().replace(/[.!?。！？]+$/,'');
+  const meaningParts=value=>new Set(String(value||'').split(/[;,、。]/).map(normalizedAnswer).filter(Boolean));
   const quizMeaning=item=>/no (?:equivalent|corresponding) (?:word|expression|translation)/i.test(item.english)?String(item.definition||'').trim():String(item.english||'').trim();
   function buildStudyQuestions(items, pool, count = 10, settings = {}) {
     const selected=shuffle([...new Map(items.filter(x=>x?.korean?.trim()&&quizMeaning(x)).map(x=>[x.id,x])).values()]).slice(0,count);
@@ -30,7 +30,8 @@
       // Never manufacture fake meanings to fill a question that lacks three real alternatives.
       if(distractors.length<3)return null;
       const options=shuffle([correct,...distractors]);
-      return {id:`study-${item.id}`,relatedId:item.id,section:item.kind,prompt:reverse?'Choose the matching Korean.':'Choose the English meaning.',passage:reverse?item.definition||quizMeaning(item):item.korean,passageLanguage:reverse?'en':'ko',options,answer:options.indexOf(correct),explanation:`${item.korean} — ${quizMeaning(item)}${item.definition&&item.definition!==quizMeaning(item)?'\n'+item.definition:''}${item.example?'\n'+item.example+(item.translation?'\n'+item.translation:''):''}`};
+      const locale=settings.locale==='ja'?'ja':'en';
+      return {id:`study-${item.id}`,relatedId:item.id,section:item.kind,prompt:reverse?(locale==='ja'?'意味に合う韓国語を選んでください。':'Choose the matching Korean.'):(locale==='ja'?'日本語の意味を選んでください。':'Choose the English meaning.'),passage:reverse?item.definition||quizMeaning(item):item.korean,passageLanguage:reverse?locale:'ko',options,answer:options.indexOf(correct),explanation:`${item.korean} — ${quizMeaning(item)}${item.definition&&item.definition!==quizMeaning(item)?'\n'+item.definition:''}${item.example?'\n'+item.example+(item.translation?'\n'+item.translation:''):''}`};
     }).filter(Boolean);
   }
   function gradeQuiz(questions, answers) {
@@ -48,9 +49,9 @@
     if(!q || !['learn','review','exam'].includes(q.type) || !Array.isArray(q.questions) || !q.questions.length || q.questions.length>100 || !Number.isInteger(q.index) || q.index<0 || q.index>=q.questions.length || !Number.isFinite(q.startedAt)) return null;
     if(q.type==='exam' && (!['I','II'].includes(q.exam) || !Number.isFinite(q.deadline)))return null;
     if(q.questions.some(x=>!x || !clean(x.id,100) || !ids.has(x.relatedId) || !clean(x.prompt) || !Array.isArray(x.options) || x.options.length!==4 || x.options.some(o=>typeof o!=='string'||!o.trim()) || !Number.isInteger(x.answer) || x.answer<0 || x.answer>3))return null;
-    const questions=q.questions.map(x=>({id:clean(x.id,100),relatedId:x.relatedId,prompt:clean(x.prompt),section:clean(x.section,30),passage:clean(x.passage,8000),passageLanguage:x.passageLanguage==='en'?'en':'ko',audio:clean(x.audio,8000),options:x.options.map(o=>clean(o,1000)),answer:x.answer,explanation:clean(x.explanation,8000)}));
+    const questions=q.questions.map(x=>({id:clean(x.id,100),relatedId:x.relatedId,prompt:clean(x.prompt),section:clean(x.section,30),passage:clean(x.passage,8000),passageLanguage:['en','ja'].includes(x.passageLanguage)?x.passageLanguage:'ko',audio:clean(x.audio,8000),options:x.options.map(o=>clean(o,1000)),answer:x.answer,explanation:clean(x.explanation,8000)}));
     const answers={}; for(let i=0;i<questions.length;i++) if(Number.isInteger(q.answers?.[i])&&q.answers[i]>=0&&q.answers[i]<4)answers[i]=q.answers[i];
-    return {type:q.type,exam:q.type==='exam'?q.exam:undefined,origin:['home','library','collection','stats','exams'].includes(q.origin)?q.origin:q.type==='exam'?'exams':'home',learningLevel:Number.isInteger(q.learningLevel)&&q.learningLevel>=0&&q.learningLevel<=6?q.learningLevel:undefined,practiceDirection:['mixed','korean','meaning'].includes(q.practiceDirection)?q.practiceDirection:'meaning',questions,answers,index:q.index,startedAt:q.startedAt,deadline:q.type==='exam'?q.deadline:null};
+    return {type:q.type,locale:q.locale==='ja'?'ja':'en',exam:q.type==='exam'?q.exam:undefined,origin:['home','library','collection','stats','exams'].includes(q.origin)?q.origin:q.type==='exam'?'exams':'home',learningLevel:Number.isInteger(q.learningLevel)&&q.learningLevel>=0&&q.learningLevel<=6?q.learningLevel:undefined,practiceDirection:['mixed','korean','meaning'].includes(q.practiceDirection)?q.practiceDirection:'meaning',questions,answers,index:q.index,startedAt:q.startedAt,deadline:q.type==='exam'?q.deadline:null};
   }
   function validateBackup(raw, builtinIds = []) {
     if (!raw || raw.schemaVersion!==SCHEMA || !Array.isArray(raw.custom) || !Array.isArray(raw.saved)) throw new Error('This is not a Danuri backup (schema version 1).');
